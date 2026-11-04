@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="model_fields_report_config_view_list" model="ir.ui.view">
+        <field name="name">ir.model.fields.report.config.list</field>
+        <field name="model">ir.model.fields</field>
+        <field name="priority" eval="99" />
+        <field name="arch" type="xml">
+            <list string="Fields" duplicate="false">
+                <field name="name" />
+                <field name="field_description" />
+                <field name="ttype" />
+                <field name="relation" />
+            </list>
+        </field>
+    </record>
+</odoo>

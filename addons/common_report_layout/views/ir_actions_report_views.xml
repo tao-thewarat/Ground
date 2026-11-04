@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="act_report_report_config_view_list" model="ir.ui.view">
+        <field name="name">ir.actions.report.report.config.list</field>
+        <field name="model">ir.actions.report</field>
+        <field name="priority" eval="99" />
+        <field name="arch" type="xml">
+            <list string="Report">
+                <field name="name" />
+                <field name="model" />
+                <field name="report_name" />
+                <field name="attachment" />
+            </list>
+        </field>
+    </record>
+</odoo>

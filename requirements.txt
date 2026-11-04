@@ -1,0 +1,5 @@
+# match odoo 20.0 requirements.txt pins so pip does not upgrade odoo's own deps
+freezegun==1.2.1 ; python_version < '3.13'
+freezegun==1.5.1 ; python_version >= '3.13'
+packaging==25.0
+pydantic==2.12.4

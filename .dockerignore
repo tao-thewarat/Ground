@@ -1,0 +1,10 @@
+test-output
+.flake8
+node_modules
+.ruff_cache
+.vscode
+.gitignore
+.pre-commit-config.yaml
+docker-compose.*
+.test.*
+README.md

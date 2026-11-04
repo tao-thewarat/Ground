@@ -1,0 +1,119 @@
+@font-face {
+  font-family: "Sarabun";
+  src: url("/common_report_layout/static/src/font/Sarabun-Regular.ttf") format("truetype");
+}
+
+.report-company-img {
+  max-height: 6rem;
+  max-width: 6rem;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+.address-line-height {
+  line-height: 1.35rem;
+}
+
+.box-document-detail {
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  line-height: 1.35rem;
+}
+
+.footer-signature {
+  border-top: 1px solid #cccccc;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  position: relative;
+}
+
+.footer-signature-position {
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.sign-users {
+  padding-top: 0.5rem;
+  text-align: center;
+}
+
+.user-digital-sign {
+  text-align: -webkit-center;
+  height: 4rem;
+}
+
+.sign-partition {
+  width: 10%;
+}
+
+.sign-space {
+  width: 80%;
+  text-align: center;
+
+  span {
+    white-space: nowrap;
+  }
+}
+
+.report-qr-code {
+  height: auto;
+  width: 90px;
+  margin-right: 0.5rem;
+}
+
+.signature-stamp-container {
+  position: relative;
+  display: inline-block;
+}
+
+.report-stamp-wrapper {
+  position: relative;
+}
+
+// Centered on its signature column (whatever the number of signatures), then
+// shifted slightly to the right
+.report-stamp-position {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-10%);
+  transform: translateX(-10%);
+  padding-top: 31px !important;
+  margin: 0 !important;
+  z-index: -1;
+}
+
+.report-stamp-img {
+  max-height: 120px;
+  max-width: 150px;
+  min-width: 120px;
+}
+
+.footer-page-box-sign {
+  margin-bottom: 5px;
+}
+
+.footer-page-box-no-sign {
+  margin-bottom: -9px;
+}
+
+.footer-page-box-only-qr {
+  margin-bottom: -16px;
+}
+
+.page-counter {
+  display: inline-block;
+  height: 2rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+// Reports set up in Configure Report show their document information in Document
+// Details only: hide the standard block above the items table (e.g. Invoice Date,
+// Due Date) so nothing is printed twice and the table moves up
+.o_common_report_config #informations {
+  display: none !important;
+}

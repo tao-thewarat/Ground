@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.form.inherit.report</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="reporting_setting"
+                    string="Reporting"
+                    groups="base.group_no_one"
+                >
+                    <group id="report_main">
+                        <group id="group_report_1">
+                            <field
+                                name="company_stamp"
+                                widget="image"
+                                options="{'size': [0, 50]}"
+                            />
+                        </group>
+                        <group id="group_report_2" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

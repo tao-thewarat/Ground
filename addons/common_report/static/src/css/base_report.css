@@ -1,0 +1,40 @@
+.footer-summary {
+    border-top: 1px solid #cccccc;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    line-height: 1.75rem;
+    position: relative;
+}
+
+.summary-box-1 {
+    margin-left: 2rem;
+    border-radius: 0.5rem;
+    padding: 0 1.25rem;
+    width: 24.5rem;
+    height: 5rem;
+}
+
+.wht-box-section {
+    position: absolute;
+    padding: 0 1.25rem;
+    margin-top: -6rem;
+    margin-left: 28.5rem;
+    border-radius: 0.5rem;
+    width: 24.5rem;
+    height: 3rem;
+    z-index: -1;
+}
+
+.summary-box-2 {
+    margin-left: 4rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 24.5rem;
+    height: 3rem;
+}
+
+.summary-box-3 {
+    border-radius: 0.5rem;
+    width: 24.5rem;
+    height: 3rem;
+}

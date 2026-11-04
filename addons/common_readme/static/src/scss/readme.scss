@@ -1,0 +1,169 @@
+// Shared styles for the static/description/index.html of every IBase module.
+// Odoo injects that file into the Apps form view, so backend assets apply to it.
+// Colors stay theme agnostic: the text color is inherited and every surface is
+// translucent, so the same markup reads on the light and the dark backend.
+
+$o-ibase-accent: #34558a;
+$o-ibase-line: rgba(128, 128, 128, 0.3);
+$o-ibase-tint: rgba($o-ibase-accent, 0.08);
+$o-ibase-muted-opacity: 0.7;
+
+.o_common_readme {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+    font-size: 15px;
+    line-height: 1.6;
+
+    &__hero {
+        border-bottom: 3px solid $o-ibase-accent;
+        padding-bottom: 24px;
+        margin-bottom: 40px;
+
+        h1 {
+            margin: 0;
+            font-size: 34px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+    }
+
+    &__lead {
+        opacity: $o-ibase-muted-opacity;
+        font-size: 17px;
+        margin: 12px 0 16px;
+    }
+
+    &__tag {
+        display: inline-block;
+        border: 1px solid $o-ibase-accent;
+        border-radius: 999px;
+        color: $o-ibase-accent;
+        font-size: 12px;
+        letter-spacing: 0.4px;
+        margin-right: 6px;
+        padding: 3px 12px;
+        text-transform: uppercase;
+    }
+
+    &__section {
+        margin-bottom: 48px;
+
+        > h2 {
+            margin: 0 0 20px;
+            font-size: 20px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            border-left: 4px solid $o-ibase-accent;
+            padding-left: 12px;
+        }
+
+        > p {
+            margin: 0;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    &__card {
+        background: $o-ibase-tint;
+        border: 1px solid $o-ibase-line;
+        border-radius: 8px;
+        padding: 18px 20px;
+
+        h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+        }
+
+        p {
+            margin: 0;
+            opacity: $o-ibase-muted-opacity;
+            font-size: 14px;
+        }
+    }
+
+    &__steps {
+        border-collapse: collapse;
+        width: 100%;
+
+        td {
+            padding: 8px 0;
+            vertical-align: top;
+        }
+
+        td:first-child {
+            padding-right: 14px;
+            width: 36px;
+            color: $o-ibase-accent;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    &__usage {
+        margin-bottom: 36px;
+
+        h3 {
+            margin: 0 0 4px;
+            font-size: 17px;
+        }
+
+        p {
+            margin: 0 0 12px;
+            opacity: $o-ibase-muted-opacity;
+            font-size: 14px;
+        }
+    }
+
+    &__shot {
+        display: block;
+        max-width: 100%;
+        border: 1px solid $o-ibase-line;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    &__timeline {
+        border-left: 2px solid $o-ibase-line;
+        padding-left: 20px;
+    }
+
+    &__release {
+        margin-bottom: 20px;
+
+        h4 {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        > span {
+            opacity: $o-ibase-muted-opacity;
+            font-size: 13px;
+        }
+
+        ul {
+            margin: 6px 0 0;
+            padding-left: 18px;
+            opacity: $o-ibase-muted-opacity;
+            font-size: 14px;
+        }
+    }
+
+    &__ticket {
+        color: $o-ibase-accent;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    code {
+        background: $o-ibase-tint;
+        border-radius: 4px;
+        font-size: 13px;
+        padding: 2px 6px;
+    }
+}

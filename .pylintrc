@@ -1,0 +1,42 @@
+[MASTER]
+load-plugins=pylint_odoo
+ignore=migrations
+jobs=0
+score=n
+
+[IMPORTS]
+deprecated-modules=pdb,pudb,ipdb,bs4,pytz
+
+[ODOOLINT]
+valid-odoo-versions=20.0
+
+[MESSAGES CONTROL]
+disable=
+    import-error,
+    too-few-public-methods,
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring,
+    manifest-required-author,
+    manifest-maintainers-list,
+    missing-readme,
+    license-allowed,
+    development-status-allowed,
+    manifest-superfluous-key,
+    protected-access,
+    attribute-defined-outside-init,
+    invalid-name,
+    translation-not-lazy,
+    duplicate-code,
+    line-too-long,
+    odoo-addons-relative-import,
+    too-many-public-methods,
+    too-many-arguments,
+    too-many-positional-arguments,
+    manifest-deprecated-key,
+    self-cls-assignment,
+    too-many-lines,
+
+[REPORTS]
+reports=no
+output-format=colorized

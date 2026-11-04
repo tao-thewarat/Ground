@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Items table built from the Table Columns of the Configure Report -->
+    <template id="ibase_table_columns">
+        <t
+            t-set="ibase_columns"
+            t-value="ibase_table_config.table_column_ids.filtered('is_visible')"
+        />
+        <t
+            t-set="ibase_lines"
+            t-value="ibase_table_config._get_table_lines(table_doc)"
+        />
+        <t t-set="ibase_row_number" t-value="ibase_table_config.is_row_number" />
+        <t
+            t-set="ibase_row_numbers"
+            t-value="ibase_table_config._get_row_numbers(ibase_lines)"
+        />
+        <table
+            class="o_has_total_table table o_main_table table-borderless o_ibase_table_columns"
+            name="ibase_table_columns"
+        >
+            <thead>
+                <tr>
+                    <th
+                        t-if="ibase_row_number"
+                        class="text-center text-nowrap"
+                        style="width: 1%;"
+                        name="th_row_number"
+                    >
+                        <span t-out="ibase_table_config.row_number_title" />
+                    </th>
+                    <th
+                        t-foreach="ibase_columns"
+                        t-as="column"
+                        t-att-class="column._get_css_class(header=True)"
+                        t-attf-style="width: {{ column.width }}%;"
+                    >
+                        <span t-out="column.name" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="ibase_lines" t-as="line">
+                    <t
+                        t-set="line_type"
+                        t-value="'display_type' in line._fields and line.display_type"
+                    />
+                    <tr
+                        t-if="line_type in ('line_section', 'line_subsection', 'line_note')"
+                        t-att-class="'fst-italic o_line_note' if line_type == 'line_note' else 'fw-bold o_line_section'"
+                    >
+                        <td
+                            t-att-colspan="len(ibase_columns) + (1 if ibase_row_number else 0)"
+                        >
+                            <span
+                                t-out="ibase_table_config._get_table_line_label(line)"
+                                t-options="{'widget': 'text'}"
+                            />
+                        </td>
+                    </tr>
+                    <tr t-else="">
+                        <td
+                            t-if="ibase_row_number"
+                            class="text-center"
+                            name="td_row_number"
+                        >
+                            <span t-out="ibase_row_numbers[line_index]" />
+                        </td>
+                        <td
+                            t-foreach="ibase_columns"
+                            t-as="column"
+                            t-att-class="column._get_css_class()"
+                        >
+                            <span t-out="column._get_display_value(line)" />
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
+</odoo>

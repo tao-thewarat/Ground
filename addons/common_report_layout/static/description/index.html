@@ -1,0 +1,464 @@
+<div class="o_common_readme">
+
+  <!-- hero -->
+  <div class="o_common_readme__hero">
+    <h1>IBase: Report Layout</h1>
+    <p class="o_common_readme__lead">
+      One configurable document layout for every PDF report: choose what the header shows,
+      how it is formatted and where it sits on the page, per report and per company.
+    </p>
+    <span class="o_common_readme__tag">Odoo 20.0</span>
+    <span class="o_common_readme__tag">Reporting</span>
+    <span class="o_common_readme__tag">PDF Layout</span>
+  </div>
+
+  <!-- overview -->
+  <div class="o_common_readme__section">
+    <h2>Overview</h2>
+    <p>
+      Standard Odoo layouts print a fixed address block and leave every other detail to the
+      report template. This module adds the <strong>IBase</strong> document layout and a
+      <strong>Configure Report</strong> record for each PDF report. On it you pick which
+      address and document fields appear in the header, their labels and widths, which
+      parts are bold, how many copies to print, the QR code and signature boxes in the
+      footer, and the vertical position of the header body. The settings are stored per
+      report and per company and apply to every document printed with that report.
+    </p>
+  </div>
+
+  <!-- key features -->
+  <div class="o_common_readme__section">
+    <h2>Key Features</h2>
+    <div class="o_common_readme__grid">
+      <div class="o_common_readme__card">
+        <h3>Address lines</h3>
+        <p>
+          Print any partner or company address of the record, with the country format or
+          your own, such as <code>%(street)s</code>, <code>%(partner_name)s</code> or
+          <code>%(vat)s</code>.
+        </p>
+      </div>
+      <div class="o_common_readme__card">
+        <h3>Document details</h3>
+        <p>
+          Show any field of the record, or a field of a related record, with a default value
+          when it is empty.
+        </p>
+      </div>
+      <div class="o_common_readme__card">
+        <h3>Label and value bold</h3>
+        <p>
+          Make the label, the value or both bold on each address and document line,
+          independently.
+        </p>
+      </div>
+      <div class="o_common_readme__card">
+        <h3>Body position</h3>
+        <p>
+          Move Address and Document Details up or down in millimetres and add space before
+          the items table. The logo, company address and title stay in place.
+        </p>
+      </div>
+      <div class="o_common_readme__card">
+        <h3>Original and copies</h3>
+        <p>
+          Print the original and any number of copies in one PDF, each with its own label
+          and title.
+        </p>
+      </div>
+      <div class="o_common_readme__card">
+        <h3>QR code and signatures</h3>
+        <p>
+          Add a QR code with the portal link, document link or number, and signature boxes with the
+          date and the company stamp. Move the signatures up or
+          down and print the label above or below the signature.
+        </p>
+      </div>
+      <div class="o_common_readme__card">
+        <h3>Language and dates</h3>
+        <p>
+          Print in the user's language, the report's language or a fixed one, with custom
+          date formats and the Buddhist Era year.
+        </p>
+      </div>
+      <div class="o_common_readme__card">
+        <h3>Table columns</h3>
+        <p>
+          Choose the columns of the items table: any field of the line or of its product,
+          with width, alignment and wrapping. Sections and notes keep their own rows.
+        </p>
+      </div>
+      <div class="o_common_readme__card">
+        <h3>Totals</h3>
+        <p>
+          Choose the lines below the items table: amounts of the document, taxes per group
+          and the payments reconciled with an invoice, each bold, hidden or hidden at zero.
+        </p>
+      </div>
+      <div class="o_common_readme__card">
+        <h3>Margins follow the content</h3>
+        <p>
+          Page margins grow with the number of header lines and the footer content, so the
+          items table never runs under the header.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- how it works -->
+  <div class="o_common_readme__section">
+    <h2>How It Works</h2>
+    <table class="o_common_readme__steps">
+      <tr>
+        <td>1</td>
+        <td>
+          Turn on the <strong>IBase</strong> layout for the company in
+          <strong>Settings &gt; General Settings &gt; Configure Document Layout</strong>.
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>
+          Create one <strong>Configure Report</strong> record per PDF report and company.
+        </td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>
+          Fill in the <strong>Header</strong>, <strong>Footer</strong> and
+          <strong>Other Options</strong> tabs, then save.
+        </td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>
+          Print the document as usual. The settings are applied to every PDF of that report.
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- configuration guide -->
+  <div class="o_common_readme__section">
+    <h2>Configuration Guide</h2>
+
+    <div class="o_common_readme__usage">
+      <h3>1. Open Configure Report</h3>
+      <p>
+        Go to <strong>Settings &gt; Configure Report</strong>. The list shows one record per
+        report and company. Click a record to change it, or <strong>New</strong> to configure
+        another report.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/01-menu.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>2. Choose the report</h3>
+      <p>
+        Pick the <strong>Report</strong> to configure. Only QWeb PDF reports without their own
+        paper format are listed. <strong>Name</strong> is filled from the report and
+        <strong>Model</strong> shows which documents it prints. A report can be configured
+        once per company.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/02-new-report.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>3. Header: ratio and title</h3>
+      <p>
+        <strong>Address Details: Ratio</strong> splits the 12 columns of the page between the
+        address (left) and the document details box (right). <strong>Address 6 : Details
+        6</strong> gives each half. Turn on <strong>Specific Title</strong> to print your
+        own document title instead of the report's.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/03-form-header.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>4. Header: original and copies</h3>
+      <p>
+        Turn on <strong>Copy Document</strong> and set <strong>Number of Copies</strong>. The
+        PDF then holds the original plus that many copies. <strong>Origin Label</strong> and
+        <strong>Copy Label</strong> are printed above the title of each page. The lines below
+        let you rename each page and choose whether its label is bold.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/04-copies.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>5. Header: body position</h3>
+      <p>
+        The body is the Address and Document Details block under the logo.
+        <strong>Vertical Offset (mm)</strong> moves it: negative up, positive down, decimals
+        allowed. <strong>Gap Before Items (mm)</strong> adds space between the body and the
+        items table, 0 keeps the default spacing. The arrows change a value by 1 mm and each
+        <strong>Reset</strong> sets its value back to 0. The items table moves with the body;
+        the logo, company address and title stay where they are.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/05-body-position.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>6. Header: address lines</h3>
+      <p>
+        Each line prints one address. <strong>Label</strong> is the text on the left and
+        <strong>Field</strong> is the partner or company of the document to read the address
+        from. Turn on <strong>Custom Format</strong> to write the layout yourself in
+        <strong>Layout in Reports</strong>; otherwise the country format is used.
+        <strong>Label Bold</strong> and <strong>Value Bold</strong> make each part bold
+        separately, and <strong>Text Wrap</strong> lets long text break onto the next line.
+        Drag the handle to reorder the lines.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/06-address-lines.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>7. Address format placeholders</h3>
+      <p>
+        Under the lists, the legend shows every placeholder you can use in
+        <strong>Layout in Reports</strong>, for example <code>%(street)s</code>,
+        <code>%(partner_name)s</code> or <code>%(vat)s</code> for the Tax ID. An empty value
+        prints nothing, and unknown placeholders are removed.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/08-address-legend.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>8. Header: document details</h3>
+      <p>
+        These lines fill the box on the right. Pick the <strong>Field</strong> of the
+        document; click <em>&gt;</em> next to a relation to print one of its fields, e.g.
+        <em>Salesperson &gt; Name</em>. A relation alone prints its name and dates follow the
+        report date format. <strong>Default Value</strong> is printed when the field is empty.
+        <strong>Label Bold</strong> and <strong>Value Bold</strong> work as on the address
+        lines.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/07-document-lines.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>9. Footer: QR code and signatures</h3>
+      <p>
+        Turn on <strong>Show QR Code</strong> and choose what it encodes: the portal link,
+        the document number or the document link. <strong>QR Label</strong> is printed above
+        it.
+      </p>
+      <p>
+        Under <strong>Signature</strong>, <strong>Vertical Offset (mm)</strong> moves every
+        signature box together: negative up, positive down, decimals allowed. The arrows change
+        it by 1 mm and <strong>Reset</strong> sets it back to 0. The page number stays where it
+        is.
+      </p>
+      <p>
+        Each line adds one signature box. <strong>Label</strong> is its title and
+        <strong>Label Position</strong> prints it above (<em>Top</em>, the default) or below
+        (<em>Bottom</em>) the signature. <strong>Bottom Label</strong> is printed under the
+        signature in front of the date, for example <em>Date: [Sign Date]</em>; leave it empty
+        to hide it. <strong>Sign Date</strong> picks the date from the document; without a
+        date, a dotted line is left to write it by hand. <strong>Company Stamp</strong> adds
+        the company stamp.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/09-footer.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>10. Printed signatures</h3>
+      <p>
+        With the settings above, <em>Prepared by</em> keeps its label on top and prints
+        <em>Date:</em> with the invoice date. <em>Approved by</em> prints its label under the
+        signature area and leaves the date to fill in.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/12-signature-pdf.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>11. Other options: language and dates</h3>
+      <p>
+        <strong>Report Lang Options</strong> prints in the report's language, the user's
+        language or a fixed one. Turn on <strong>Locale Date</strong> to control how dates
+        are printed: <strong>Buddhist Era</strong> converts the year, <strong>Show Time
+        Format</strong> adds the time, and <strong>Format Options</strong> takes the format
+        from the user, the partner or the <strong>Date Format</strong> you type, using the
+        codes in the legend.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/10-other-options.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>12. Table columns: the lines</h3>
+      <p>
+        On the <strong>Table Columns</strong> tab, turn on <strong>Custom Table
+        Columns</strong> to replace the items table of the report with your own columns. The
+        totals below the table are set on the <strong>Totals</strong> tab.
+      </p>
+      <p>
+        With <strong>Line Source</strong> set to <em>Field</em>, pick the <strong>Line
+        Field</strong> holding the lines, e.g. <em>Invoice lines</em> or <em>Order Lines</em>,
+        and optionally a <strong>Line Filter</strong> to leave some lines out. Lines are
+        printed in their document order.
+      </p>
+      <p>
+        <em>Python Code</em> is for administrators only. Choose the <strong>Line
+        Model</strong> and set <code>result</code> to the lines to print; <code>doc</code> is
+        the printed record and <code>env</code> the environment, for example
+        <code>result = doc.order_line.filtered(lambda line: line.product_uom_qty)</code>. The
+        result must be records of the Line Model, otherwise printing stops with an error.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/13-table-source.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>13. Table columns: the columns</h3>
+      <p>
+        <strong>Load Default Columns</strong> fills the usual columns of the line model
+        (description, quantity, unit price, taxes, amount). <strong>Add a line</strong> adds a
+        column: type the <strong>Label</strong> and pick the <strong>Field</strong>; click
+        <em>&gt;</em> next to a relation to go deeper, e.g. <em>Product &gt; Internal
+        Reference</em> or <em>Product &gt; Barcode</em>. Set the <strong>Width (%)</strong>,
+        the <strong>Header Alignment</strong> and <strong>Value Alignment</strong> separately
+        (e.g. a centred header over left-aligned descriptions) and <strong>Text
+        Wrap</strong>, hide a column with
+        <strong>Visible</strong> and drag the handle to reorder. The widths of the visible
+        columns must add up to 100%, shown in <strong>Total Width</strong>.
+      </p>
+      <p>
+        Turn on <strong>Show Row Number</strong> to add a first column numbering the lines
+        1, 2, 3&hellip; and set its header in <strong>Row Number Column Title</strong>
+        (<em>No.</em> by default, e.g. <em>ลำดับ</em> or <em>#</em>). Sections and notes are
+        not numbered. The numbers run on across pages and start again at 1 for each
+        document and each copy; turn the option off to remove the column.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/14-table-columns.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>14. Printed table</h3>
+      <p>
+        Each value is formatted like its field: amounts with the currency, numbers with
+        their precision, dates in the report language, relations by name. Empty values print
+        nothing. Section lines span the whole table in bold and notes in italics. The same
+        table is used in the HTML preview and in the PDF.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/15-table-print.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>15. Totals: the lines</h3>
+      <p>
+        On the <strong>Totals</strong> tab, turn on <strong>Custom Totals</strong> to replace
+        the totals below the items table with your own lines. <strong>Load Default
+        Totals</strong> fills the usual lines of the report model: Untaxed Amount, Taxes,
+        Total, Payments and Amount Due, keeping only those the model has.
+      </p>
+      <p>
+        <strong>Add a line</strong> adds a total: type the <strong>Label</strong> and choose
+        the <strong>Source</strong>. <em>Document Field</em> prints one amount of the
+        document; pick the <strong>Field</strong> among its amount and number fields, custom
+        fields included. <em>Tax Summary</em> prints one line per tax group, e.g.
+        <em>VAT 7%</em>. <em>Payments</em> prints one line per payment reconciled with the
+        invoice, with its date; outstanding credits not yet reconciled are not deducted.
+        Turn on <strong>Bold</strong>, hide a line with <strong>Visible</strong> or only when
+        its amount is zero with <strong>Hide When Zero</strong>, and drag the handle to
+        reorder.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/16-totals.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>16. Printed totals</h3>
+      <p>
+        Amounts are right-aligned in the currency and decimals of the document. The values
+        are read from the document only, nothing is recomputed in accounting. The same totals
+        are used in the HTML preview and in the PDF. Here the invoice is partly paid: the
+        payment line shows its date and the amount due what is left.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/17-totals-print.png" />
+    </div>
+
+    <div class="o_common_readme__usage">
+      <h3>17. The printed document</h3>
+      <p>
+        Save the record and print the document. Here the customer address has a bold label
+        and value, the Tax ID line is regular, the document details box shows the number in
+        bold, and the footer carries both signature boxes and the QR code.
+      </p>
+      <img loading="lazy" class="o_common_readme__shot" src="./assets/screenshots/11-invoice-pdf.png" />
+    </div>
+  </div>
+
+  <!-- release history -->
+  <div class="o_common_readme__section">
+    <h2>Release History</h2>
+
+    <div class="o_common_readme__timeline">
+      <div class="o_common_readme__release">
+        <h4>20.0.1.6.0</h4>
+        <span>4 November 2026 &middot;</span>
+        <ul>
+          <li>Table Columns: Show Row Number adds a numbered first column, with its own
+            title (No. by default); sections and notes are not numbered</li>
+        </ul>
+      </div>
+      <div class="o_common_readme__release">
+        <h4>20.0.1.5.0</h4>
+        <span>3 November 2026 &middot;</span>
+        <ul>
+          <li>Reports set up in Configure Report no longer print the standard information
+            block above the items table (e.g. Invoice Date, Due Date): document information
+            comes from Document Details only, and the table moves up</li>
+        </ul>
+      </div>
+      <div class="o_common_readme__release">
+        <h4>20.0.1.4.0</h4>
+        <span>3 November 2026 &middot;</span>
+        <ul>
+          <li>Totals tab: replace the totals below the items table with configurable lines</li>
+          <li>Sources: document amount fields, taxes per group, reconciled payments</li>
+          <li>Bold, visible and hide when zero per line, reordered by drag and drop</li>
+        </ul>
+      </div>
+      <div class="o_common_readme__release">
+        <h4>20.0.1.3.0</h4>
+        <span>23 October 2026 &middot;</span>
+        <ul>
+          <li>Table Columns tab: replace the items table with configurable columns</li>
+          <li>Lines from a field with an optional filter, or from Python code (administrators)</li>
+          <li>Columns on any line or product field, with width, alignment, wrap and visibility</li>
+          <li>Section and note rows, and the configured layout in the HTML preview</li>
+          <li>Document Details: one Field path picked with the field selector, replacing
+            Field Type, Field and Key Field</li>
+        </ul>
+      </div>
+      <div class="o_common_readme__release">
+        <h4>20.0.1.2.0</h4>
+        <span>22 October 2026 &middot;</span>
+        <ul>
+          <li>Signature Vertical Offset: move all signature boxes up or down, per Configure Report</li>
+          <li>Label Position: print the signature label above or below the signature</li>
+          <li>Bottom Label printed with the Sign Date under the signature, or a line to fill in</li>
+          <li>Signature list at full width in the Footer tab</li>
+        </ul>
+      </div>
+      <div class="o_common_readme__release">
+        <h4>20.0.1.1.0</h4>
+        <span>22 October 2026 &middot;</span>
+        <ul>
+          <li>Body Position: vertical offset and gap before items, per Configure Report</li>
+          <li>Label Bold and Value Bold on address and document lines</li>
+          <li><code>%(vat)s</code> placeholder in address formats</li>
+          <li>Address and Document Details lists at full width in the form</li>
+        </ul>
+      </div>
+      <div class="o_common_readme__release">
+        <h4>20.0.1.0.0</h4>
+        <span>21 October 2026 &middot;</span>
+        <ul>
+          <li>Migrated to Odoo 20.0</li>
+          <li>Configure Report per report and company: address and document lines, copies, QR code and signatures</li>
+          <li>IBase document layout with company stamp, colours and table styles</li>
+          <li>Report language and locale date options, including the Buddhist Era</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

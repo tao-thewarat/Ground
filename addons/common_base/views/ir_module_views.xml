@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_module_filter" model="ir.ui.view">
+        <field name="name">ir.module.module.search.inherit.common_base</field>
+        <field name="model">ir.module.module</field>
+        <field name="inherit_id" ref="base.view_module_filter" />
+        <field name="arch" type="xml">
+            <filter name="extra" position="after">
+                <filter
+                    name="common_base"
+                    string="Common Base"
+                    domain="[('name', 'ilike', 'Common')]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="base.open_module_tree" model="ir.actions.act_window">
+        <field name="context">{'search_default_common_base':1}</field>
+    </record>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Totals table built from the Totals of the Configure Report -->
+    <template id="ibase_totals">
+        <t
+            t-set="ibase_currency"
+            t-value="ibase_totals_config._get_totals_currency(totals_doc)"
+        />
+        <table
+            class="o_total_table table table-borderless avoid-page-break-inside o_ibase_totals"
+            name="ibase_totals"
+        >
+            <tr
+                t-foreach="ibase_totals_config._get_total_rows(totals_doc)"
+                t-as="row"
+                t-att-class="'fw-bold' if row['bold'] else None"
+            >
+                <td>
+                    <i
+                        t-if="row['type'] == 'payment'"
+                        class="oe_payment_label text-nowrap"
+                    >
+                        <t t-if="row['is_refund']">Reversed on</t>
+                        <t t-else="">Paid on</t>
+                        <t t-out="row['date']" t-options="{'widget': 'date'}" />
+                    </i>
+                    <span t-else="" t-out="row['label']" />
+                </td>
+                <td class="text-end">
+                    <span
+                        class="text-nowrap"
+                        t-out="row['amount']"
+                        t-options="{'widget': 'monetary', 'display_currency': ibase_currency}"
+                    />
+                </td>
+            </tr>
+        </table>
+    </template>
+</odoo>

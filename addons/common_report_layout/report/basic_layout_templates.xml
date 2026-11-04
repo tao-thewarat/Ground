@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="external_layout_ibase">
+        <t t-if="not o" t-set="o" t-value="doc" />
+
+        <!-- Get Report Config -->
+        <t t-set="report_config" t-value="o and o._context.get('report_config')" />
+
+        <t t-if="report_config">
+            <!-- Set Lang -->
+            <t t-set="report_config" t-value="report_config.with_context(lang=lang)" />
+
+            <t t-if="show_copy and copy_count">
+                <t
+                    t-set="copy_label_list"
+                    t-value="report_config._get_copy_label_list() or []"
+                />
+            </t>
+
+            <!-- Address Value List -->
+            <t
+                t-set="address_vals_list"
+                t-value="report_config.get_report_address_vals_list(o) or []"
+            />
+
+            <!-- Document Detail Value List -->
+            <t
+                t-set="document_vals_list"
+                t-value="report_config.get_report_document_vals_list(o) or []"
+            />
+
+            <!-- Signature Values List -->
+            <t
+                t-set="signature_vals_list"
+                t-value="report_config.get_report_signature_vals_list(o) or []"
+            />
+
+            <t t-if="is_qr_code">
+                <t
+                    t-set="report_qr_code"
+                    t-value="report_config.generate_qr_config(o)"
+                />
+            </t>
+
+            <!-- Other Stuff -->
+            <t
+                t-set="layout_document_title"
+                t-value="report_config.layout_document_title if report_config.is_specific_title else layout_document_title"
+            />
+            <t
+                t-set="extra_footer_template"
+                t-value="report_config._get_extra_footer_template(o)"
+            />
+        </t>
+
+        <!-- Header -->
+        <t t-call="common_report_layout.ibase_layout_header" />
+
+        <!-- Body: table style follows the company's Table Design -->
+        <t
+            t-set="table_style_classes"
+            t-value="{
+                'ibase': 'o_table_ibase',
+                'light': 'o_report_layout_standard o_table_standard',
+                'bold': 'o_report_layout_bold o_table_bold',
+                'boxed': 'o_report_layout_boxed o_table_boxed',
+                'striped': 'o_report_layout_striped o_table_striped',
+                'bubble': 'o_report_layout_bubble o_table_boxed-rounded',
+                'column': 'o_report_layout_column o_table_column',
+                'compact': 'o_report_layout_compact o_table_compact',
+            }.get(company.report_tables_id, '')"
+        />
+        <div
+            t-attf-class="article o_company_#{company.id}_layout o_report_layout_ibase {{table_style_classes}} {{report_config and 'o_common_report_config' or ''}}"
+            t-att-data-oe-model="o and o._name"
+            t-att-data-oe-id="o and o.id"
+            t-att-data-oe-lang="o and o.env.context.get('lang')"
+        >
+            <t
+                t-if="not report_config and not is_preview"
+                t-call="web.address_layout"
+            />
+            <t t-out="0" />
+        </div>
+
+        <!-- Footer -->
+        <t t-call="common_report_layout.ibase_layout_footer" />
+    </template>
+</odoo>

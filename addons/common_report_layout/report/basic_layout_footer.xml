@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Footer With Signature / QR -->
+    <template id="ibase_footer_with_signature">
+        <div class="o_footer_content footer-signature">
+            <div class="row w-100">
+                <div class="col align-items-center" name="signature_detail">
+                    <div
+                        class="row"
+                        name="row_footer_signature"
+                        t-att-style="signature_style"
+                    >
+                        <!-- Signature -->
+                        <div
+                            t-foreach="signature_vals_list"
+                            t-as="sign"
+                            class="col footer-signature-position"
+                            name="foreach_signature"
+                        >
+                            <t t-set="label" t-value="sign.get('label')" />
+                            <t t-set="sign_name" t-value="sign.get('sign_name')" />
+                            <t t-set="sign_date" t-value="sign.get('sign_date')" />
+                            <t
+                                t-set="company_stamp"
+                                t-value="sign.get('company_stamp')"
+                            />
+                            <t
+                                t-set="show_company_only"
+                                t-value="not sign_name and not sign_date and company_stamp"
+                            />
+
+                            <!-- Company Stamp -->
+                            <div
+                                t-if="not show_company_only and company.company_stamp"
+                                class="report-stamp-wrapper"
+                                name="company_stamp"
+                            >
+                                <img
+                                    t-att-src="image_data_uri(company.company_stamp)"
+                                    class="report-stamp-position report-stamp-img company-stamp-opa"
+                                    alt="Stamp"
+                                    t-attf-style="{{ 'margin-top: 31px' if is_preview else '' }}"
+                                />
+                            </div>
+
+                            <t
+                                t-set="label_bottom"
+                                t-value="sign.get('label_position') == 'bottom'"
+                            />
+                            <t
+                                t-set="bottom_label"
+                                t-value="sign.get('bottom_label')"
+                            />
+
+                            <!-- Signature Label (top) -->
+                            <div
+                                t-if="not label_bottom"
+                                class="fw-bold"
+                                name="signature_label"
+                            >
+                                <span t-out="label" />
+                            </div>
+
+                            <!-- Signature Area -->
+                            <div
+                                class="user-digital-sign"
+                                name="signature_digital_sign"
+                            >
+                                <div class="signature-stamp-container">
+                                    <img
+                                        t-if="show_company_only and company.company_stamp"
+                                        class="report-stamp-img company-stamp-opa"
+                                        t-att-src="image_data_uri(company.company_stamp)"
+                                        alt="Signature"
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- Signature Label (bottom) -->
+                            <div
+                                t-if="label_bottom"
+                                class="fw-bold"
+                                name="signature_label_bottom"
+                            >
+                                <span t-out="label" />
+                            </div>
+
+                            <!-- Signature Sign Name -->
+                            <div class="sign-users">
+                                <span t-if="sign_name" t-out="sign_name" />
+                                <span t-else="">
+                                    <br />
+                                </span>
+                            </div>
+
+                            <!-- Signature Sign Date -->
+                            <div name="signature_date">
+                                <t t-if="bottom_label">
+                                    <span class="fw-bold" t-out="bottom_label" />:
+                                    <span t-out="sign_date or '....................'" />
+                                </t>
+                                <span t-elif="sign_date" t-out="sign_date" />
+                                <span t-else="">
+                                    <br />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QR Code -->
+                <div
+                    t-if="is_qr_code"
+                    t-attf-class="col-auto {{not qr_label and 'd-flex align-items-center'}}"
+                    name="div_footer_qr"
+                >
+                    <div
+                        t-if="qr_label"
+                        class="row mb-1 justify-content-center fw-bold"
+                    >
+                        <span t-out="qr_label" class="qr-label-text" />
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <img
+                            t-attf-src="data:image/png;base64,{{report_qr_code}}"
+                            class="report-qr-code"
+                            alt="QR Code"
+                        />
+                    </div>
+                </div>
+
+                <!-- Page / To Page -->
+                <div
+                    t-attf-class="col-auto d-flex align-items-end {{'footer-page-box-sign' if signature_vals_list else 'footer-page-box-no-sign' if is_qr_code and qr_label else 'footer-page-box-only-qr' if is_qr_code else 'mt-1'}}"
+                    name="footer_page"
+                >
+                    <div
+                        class="page-counter ibase-background-box-color d-flex align-items-center"
+                        name="ibase_page_box"
+                    >
+                        <t t-if="is_preview">
+                            999 / 999
+                        </t>
+                        <t t-else="">
+                            <span class="page" /> / <span class="topage" />
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Footer -->
+    <template id="ibase_layout_footer">
+        <div
+            t-attf-class="footer o_company_#{company.id}_layout o_report_layout_ibase {{report_type != 'pdf' and 'mt-auto'}}"
+            name="main_footer"
+        >
+            <t t-if="extra_footer_template" t-call="{{ extra_footer_template }}" />
+            <t
+                t-call="common_report_layout.ibase_footer_with_signature"
+                name="call_footer_signature"
+            />
+        </div>
+    </template>
+</odoo>

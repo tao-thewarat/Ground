@@ -1,0 +1,40 @@
+{
+    "name": "Common: Report Layout",
+    "summary": "Report layout",
+    "author": "OhMyDev",
+    "category": "Common/Reporting",
+    "website": "https://www.ohmydev.org",
+    "version": "20.0.1.6.0",
+    "license": "LGPL-3",
+    "contributors": [
+        "tao-thewarat",
+    ],
+    "depends": [
+        "common_readme",
+        "common_base",
+        "common_report",
+    ],
+    "data": [
+        "data/paperformat.xml",
+        "security/ir.access.csv",
+        "report/basic_layout_footer.xml",
+        "report/basic_layout_header.xml",
+        "report/basic_layout_templates.xml",
+        "report/report_templates.xml",
+        "report/table_columns_templates.xml",
+        "report/totals_templates.xml",
+        "wizard/base_document_layout_views.xml",
+        "data/report_layout.xml",
+        "views/ir_actions_report_views.xml",
+        "views/ir_model_fields_views.xml",
+        "views/report_config_views.xml",
+        "views/res_company_views.xml",
+        "views/menuitems.xml",
+    ],
+    "assets": {
+        "web.report_assets_common": [
+            "common_report_layout/static/src/scss/*.scss",
+        ],
+    },
+    "installable": True,
+}

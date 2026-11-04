@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="document_report_condition">
+        <div>
+            <page name="mixin_report_page" string="Reporting">
+                <group>
+                    <group name="report_group_1" string="Document Print Condition">
+                        <label
+                            for="is_show_label"
+                            string="Visibility"
+                            class="fw-bolder"
+                        />
+                        <div>
+                            <div>
+                                <field
+                                    name="is_show_discount"
+                                    class="oe_inline"
+                                    widget="boolean_toggle"
+                                />
+                                <span>Discount</span>
+                            </div>
+                            <div>
+                                <field
+                                    name="is_show_product_description"
+                                    class="oe_inline"
+                                    widget="boolean_toggle"
+                                />
+                                <span>Product Description</span>
+                            </div>
+                            <div>
+                                <field
+                                    name="is_show_product_code"
+                                    class="oe_inline"
+                                    widget="boolean_toggle"
+                                />
+                                <span>Product Code</span>
+                            </div>
+                        </div>
+                    </group>
+                    <group name="report_group_2" />
+                </group>
+            </page>
+        </div>
+    </template>
+</odoo>

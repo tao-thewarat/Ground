@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_report_config,report.config,report.config,base.group_user,crud,
+access_report_address_line,report.address.line,report.address.line,base.group_user,crud,
+access_report_copy_line,report.copy.line,report.copy.line,base.group_user,crud,
+access_report_document_line,report.document.line,report.document.line,base.group_user,crud,
+access_report_signature_line,report.signature.line,report.signature.line,base.group_user,crud,
+report_config_comp_rule,Report Config multi-company,report.config,,crud,"['|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]"
+access_report_table_column,report.table.column,report.table.column,base.group_user,crud,
+access_report_total_line,report.total.line,report.total.line,base.group_user,crud,

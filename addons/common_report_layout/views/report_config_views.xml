@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="report_config_view_list" model="ir.ui.view">
+        <field name="name">report.config.list</field>
+        <field name="model">report.config</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="action_report_id" />
+                <field name="model_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </list>
+        </field>
+    </record>
+
+    <record id="report_config_view_form" model="ir.ui.view">
+        <field name="name">report.config.form</field>
+        <field name="model">report.config</field>
+        <field name="arch" type="xml">
+            <form string="Configure Report">
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <span class="oe_edit_only">Name</span>
+                        <h1>
+                            <field
+                                name="name"
+                                required="1"
+                                placeholder="e.g. Report Config for..."
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="left">
+                            <field
+                                name="action_report_id"
+                                options="{'no_create': True}"
+                                context="{'list_view_ref':'common_report_layout.act_report_report_config_view_list'}"
+                            />
+                            <field name="model_id" options="{'no_open': True}" />
+                        </group>
+
+                        <group name="right">
+                            <field
+                                name="company_id"
+                                readonly="1"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page name="page_header" string="Header">
+                            <group name="group_main_header">
+                                <group
+                                    name="group_header_1"
+                                    string="Address Details: Ratio"
+                                >
+                                    <field
+                                        name="session_width"
+                                        widget="badges_selection"
+                                        nolabel="1"
+                                        colspan="2"
+                                    />
+                                    <field
+                                        name="is_specific_title"
+                                        widget="boolean_toggle"
+                                        options="{'autosave': false}"
+                                    />
+                                    <field
+                                        name="layout_document_title"
+                                        invisible="not is_specific_title"
+                                        required="is_specific_title"
+                                    />
+                                </group>
+
+                                <group name="group_header_2" string="Copies Report">
+                                    <group>
+                                        <field
+                                            name="is_copy"
+                                            widget="boolean_toggle"
+                                            options="{'autosave': false}"
+                                        />
+                                        <field
+                                            name="number_of_copies"
+                                            invisible="not is_copy"
+                                        />
+                                    </group>
+                                    <group>
+                                        <field
+                                            name="origin_label"
+                                            invisible="not is_copy"
+                                        />
+                                        <field
+                                            name="copy_label"
+                                            invisible="not is_copy"
+                                        />
+                                    </group>
+                                    <field
+                                        name="copy_line_ids"
+                                        mode="list"
+                                        nolabel="1"
+                                        invisible="not is_copy"
+                                    >
+                                        <list
+                                            editable="bottom"
+                                            limit="4"
+                                            create="0"
+                                            delete="0"
+                                        >
+                                            <field
+                                                name="doc_sequence"
+                                                readonly="1"
+                                                force_save="1"
+                                            />
+                                            <field name="name" />
+                                            <field
+                                                name="title_name"
+                                                column_invisible="not parent.is_specific_title"
+                                            />
+                                            <field
+                                                name="copy_type"
+                                                force_save="1"
+                                                column_invisible="1"
+                                            />
+                                            <!-- Used for onchange -->
+                                            <field
+                                                name="is_bold"
+                                                widget="boolean_toggle"
+                                            />
+                                        </list>
+                                    </field>
+                                </group>
+                            </group>
+
+                            <div
+                                class="o_horizontal_separator mt-4 mb-3 text-uppercase fw-bolder small"
+                            >Body Position</div>
+                            <div class="row mb-3 align-items-start" name="header_body">
+                                <div class="col-lg-6" name="div_body_offset">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <label
+                                            for="body_offset"
+                                            class="o_form_label mb-0 me-2"
+                                        />
+                                        <div style="width: 6rem">
+                                            <field name="body_offset" />
+                                        </div>
+                                        <button
+                                            name="button_body_offset_up"
+                                            type="object"
+                                            icon="keyboard_arrow_up"
+                                            title="Move up 1 mm"
+                                            class="btn btn-secondary"
+                                        />
+                                        <button
+                                            name="button_body_offset_down"
+                                            type="object"
+                                            icon="keyboard_arrow_down"
+                                            title="Move down 1 mm"
+                                            class="btn btn-secondary"
+                                        />
+                                        <button
+                                            name="button_body_offset_reset"
+                                            type="object"
+                                            string="Reset"
+                                            class="btn btn-outline-primary ms-2"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 border-start" name="div_body_gap">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <label
+                                            for="body_gap"
+                                            class="o_form_label mb-0 me-2"
+                                        />
+                                        <div style="width: 6rem">
+                                            <field name="body_gap" />
+                                        </div>
+                                        <button
+                                            name="button_body_gap_increase"
+                                            type="object"
+                                            icon="keyboard_arrow_up"
+                                            title="Increase 1 mm"
+                                            class="btn btn-secondary"
+                                        />
+                                        <button
+                                            name="button_body_gap_decrease"
+                                            type="object"
+                                            icon="keyboard_arrow_down"
+                                            title="Decrease 1 mm"
+                                            class="btn btn-secondary"
+                                        />
+                                        <button
+                                            name="button_body_gap_reset"
+                                            type="object"
+                                            string="Reset"
+                                            class="btn btn-outline-primary ms-2"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <group name="header_address" string="Address">
+                                <field
+                                    name="address_line_ids"
+                                    mode="list"
+                                    colspan="2"
+                                    nolabel="1"
+                                >
+                                    <list editable="bottom">
+                                        <field name="sequence" widget="handle" />
+                                        <field name="name" />
+                                        <field
+                                            name="field_id"
+                                            options="{'no_create': True, 'no_open': True}"
+                                            context="{'list_view_ref':'common_report_layout.model_fields_report_config_view_list'}"
+                                            required="1"
+                                        />
+                                        <field
+                                            name="is_custom_format"
+                                            widget="boolean_toggle"
+                                        />
+                                        <field
+                                            name="address_format"
+                                            invisible="not is_custom_format"
+                                            options="{'resizable': false}"
+                                        />
+                                        <field
+                                            name="is_label_bold"
+                                            widget="boolean_toggle"
+                                        />
+                                        <field
+                                            name="is_value_bold"
+                                            widget="boolean_toggle"
+                                        />
+                                        <field
+                                            name="is_text_wrap"
+                                            widget="boolean_toggle"
+                                            optional="show"
+                                        />
+                                        <field name="column_width" optional="hide" />
+                                    </list>
+                                </field>
+                            </group>
+
+                            <group name="header_document" string="Document Details">
+                                <field
+                                    name="document_line_ids"
+                                    mode="list"
+                                    colspan="2"
+                                    nolabel="1"
+                                >
+                                    <list editable="bottom">
+                                        <field name="sequence" widget="handle" />
+                                        <field name="name" />
+                                        <field name="model" column_invisible="1" />
+                                        <field
+                                            name="field_path"
+                                            widget="field_selector"
+                                            options="{'model': 'model'}"
+                                            required="1"
+                                        />
+                                        <field
+                                            name="default_value"
+                                            placeholder="e.g. -"
+                                        />
+                                        <field
+                                            name="is_label_bold"
+                                            widget="boolean_toggle"
+                                        />
+                                        <field
+                                            name="is_value_bold"
+                                            widget="boolean_toggle"
+                                        />
+                                        <field name="column_width" optional="hide" />
+                                    </list>
+                                </field>
+                            </group>
+                            <div class="row" name="div_address_helper">
+                                <div class="col-md-7" name="div_address_left">
+                                    <div
+                                        class="o_horizontal_separator mb-3 mt-4 text-uppercase fw-bolder small"
+                                        name="div_address_legend"
+                                    >
+                                        Legends for supported Address Formats
+                                    </div>
+                                    <div name="div_address_format_example">
+                                        <div>%(partner_name)<span
+                                        >s</span>: Partner name</div>
+                                        <div>%(company_name)<span
+                                        >s</span>: Company name</div>
+                                        <div>%(street)<span
+                                        >s</span>: To display the field street</div>
+                                        <div>%(state_name)<span
+                                        >s</span>: The name of the state</div>
+                                        <div>%(state_code)<span
+                                        >s</span>: The code of the state</div>
+                                        <div>%(country_name)<span
+                                        >s</span>: The name of the country</div>
+                                        <div>%(country_code)<span
+                                        >s</span>: The code of the country</div>
+                                        <div>%(vat)<span>s</span>: Tax ID</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="col-md-5 text-info"
+                                    name="div_address_right"
+                                >
+                                    <div
+                                        class="o_horizontal_separator mb-3 mt-4 text-uppercase fw-bolder small"
+                                    >Examples</div>
+                                    <div>1. %(partner_name)<span
+                                    >s</span>         → Marc Jacob</div>
+                                    <div>2. %(company_name)<span
+                                    >s</span>         → OhMyDev Corp.</div>
+                                    <div>3. %(street)<span
+                                    >s</span>         → 4557 De Silva St</div>
+                                    <div>4. %(state_name)<span
+                                    >s</span>         → California</div>
+                                    <div>5. %(state_code)<span
+                                    >s</span>         → CA</div>
+                                    <div>6. %(country_name)<span
+                                    >s</span>         → United States</div>
+                                    <div>7. %(country_code)<span
+                                    >s</span>         → US</div>
+                                    <div>8. %(vat)<span
+                                    >s</span>         → 0105556123456</div>
+                                </div>
+                            </div>
+                        </page>
+
+                        <page name="page_table_columns" string="Table Columns">
+                            <group name="group_table_source">
+                                <group name="group_table_source_left">
+                                    <field
+                                        name="is_table_columns"
+                                        widget="boolean_toggle"
+                                        options="{'autosave': false}"
+                                    />
+                                    <field
+                                        name="line_source"
+                                        widget="radio"
+                                        options="{'horizontal': true}"
+                                        invisible="not is_table_columns"
+                                    />
+                                    <field
+                                        name="line_field_id"
+                                        options="{'no_create': True, 'no_open': True}"
+                                        context="{'list_view_ref':'common_report_layout.model_fields_report_config_view_list'}"
+                                        invisible="not is_table_columns or line_source != 'field'"
+                                        required="is_table_columns and line_source == 'field'"
+                                    />
+                                    <field
+                                        name="line_model_id"
+                                        options="{'no_create': True, 'no_open': True}"
+                                        invisible="not is_table_columns or line_source != 'code'"
+                                        required="is_table_columns and line_source == 'code'"
+                                    />
+                                    <field name="line_model" invisible="1" />
+                                </group>
+                                <group name="group_table_source_right">
+                                    <field
+                                        name="is_row_number"
+                                        widget="boolean_toggle"
+                                        options="{'autosave': false}"
+                                        invisible="not is_table_columns"
+                                    />
+                                    <field
+                                        name="row_number_title"
+                                        placeholder="e.g. No., ลำดับ, #"
+                                        invisible="not is_table_columns or not is_row_number"
+                                        required="is_table_columns and is_row_number"
+                                    />
+                                    <field
+                                        name="line_domain"
+                                        widget="domain"
+                                        options="{'model': 'line_model', 'in_dialog': true}"
+                                        invisible="not is_table_columns or line_source != 'field' or not line_model"
+                                    />
+                                </group>
+                            </group>
+                            <field
+                                name="line_code"
+                                widget="code"
+                                options="{'mode': 'python'}"
+                                placeholder="result = doc.order_line.filtered(lambda line: line.product_uom_qty)"
+                                invisible="not is_table_columns or line_source != 'code'"
+                                groups="base.group_system"
+                            />
+                            <div
+                                class="o_horizontal_separator mt-4 mb-3 text-uppercase fw-bolder small"
+                                invisible="not is_table_columns"
+                            >Table Columns</div>
+                            <div
+                                class="d-flex align-items-center gap-3 mb-2"
+                                invisible="not is_table_columns"
+                                name="div_table_columns_toolbar"
+                            >
+                                <button
+                                    name="button_load_default_columns"
+                                    type="object"
+                                    string="Load Default Columns"
+                                    class="btn btn-secondary"
+                                    invisible="not line_model"
+                                    confirm="Replace the current columns with the default columns?"
+                                />
+                                <span class="o_form_label">Total Width:</span>
+                                <field
+                                    name="table_total_width"
+                                    decoration-success="table_total_width == 100"
+                                    decoration-danger="table_total_width != 100"
+                                />
+                                <span>%</span>
+                            </div>
+                            <field
+                                name="table_column_ids"
+                                mode="list"
+                                nolabel="1"
+                                invisible="not is_table_columns"
+                            >
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="line_model" column_invisible="1" />
+                                    <field name="name" />
+                                    <field
+                                        name="field_path"
+                                        widget="field_selector"
+                                        options="{'model': 'line_model'}"
+                                    />
+                                    <field name="default_value" placeholder="e.g. -" />
+                                    <field name="width" />
+                                    <field name="header_alignment" />
+                                    <field name="alignment" />
+                                    <field
+                                        name="is_text_wrap"
+                                        widget="boolean_toggle"
+                                    />
+                                    <field name="is_visible" widget="boolean_toggle" />
+                                </list>
+                            </field>
+                        </page>
+
+                        <page name="page_totals" string="Totals">
+                            <group name="group_totals">
+                                <group name="group_totals_left">
+                                    <field
+                                        name="is_totals"
+                                        widget="boolean_toggle"
+                                        options="{'autosave': false}"
+                                    />
+                                    <field name="model" invisible="1" />
+                                </group>
+                            </group>
+                            <div
+                                class="o_horizontal_separator mt-4 mb-3 text-uppercase fw-bolder small"
+                                invisible="not is_totals"
+                            >Totals</div>
+                            <div
+                                class="d-flex align-items-center gap-3 mb-2"
+                                invisible="not is_totals"
+                                name="div_totals_toolbar"
+                            >
+                                <button
+                                    name="button_load_default_totals"
+                                    type="object"
+                                    string="Load Default Totals"
+                                    class="btn btn-secondary"
+                                    invisible="not model"
+                                    confirm="Replace the current totals with the default totals?"
+                                />
+                            </div>
+                            <field
+                                name="total_line_ids"
+                                mode="list"
+                                nolabel="1"
+                                invisible="not is_totals"
+                            >
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="model" column_invisible="1" />
+                                    <field name="name" />
+                                    <field name="source" />
+                                    <field
+                                        name="field_id"
+                                        options="{'no_create': True, 'no_open': True}"
+                                        invisible="source != 'field'"
+                                        required="source == 'field'"
+                                    />
+                                    <field name="is_bold" widget="boolean_toggle" />
+                                    <field name="is_visible" widget="boolean_toggle" />
+                                    <field
+                                        name="is_hide_zero"
+                                        widget="boolean_toggle"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+
+                        <page name="page_footer" string="Footer">
+                            <group name="group_main_footer">
+                                <group name="footer_option" string="QR Code">
+                                    <label for="is_qr_code" string="Show QR Code" />
+                                    <div class="row">
+                                        <field
+                                            name="is_qr_code"
+                                            string="Show QR Code"
+                                            widget="boolean_toggle"
+                                            options="{'autosave': false}"
+                                        />
+                                        <field
+                                            name="qr_type"
+                                            widget="radio"
+                                            invisible="not is_qr_code"
+                                        />
+                                    </div>
+                                    <field name="qr_label" />
+                                </group>
+                            </group>
+
+                            <div
+                                class="o_horizontal_separator mt-4 mb-3 text-uppercase fw-bolder small"
+                            >Signature</div>
+                            <div
+                                class="d-flex align-items-center gap-2 mb-3"
+                                name="div_signature_offset"
+                            >
+                                <label
+                                    for="signature_offset"
+                                    string="Vertical Offset (mm)"
+                                    class="o_form_label mb-0 me-2"
+                                />
+                                <div style="width: 6rem">
+                                    <field name="signature_offset" />
+                                </div>
+                                <button
+                                    name="button_signature_offset_up"
+                                    type="object"
+                                    icon="keyboard_arrow_up"
+                                    title="Move up 1 mm"
+                                    class="btn btn-secondary"
+                                />
+                                <button
+                                    name="button_signature_offset_down"
+                                    type="object"
+                                    icon="keyboard_arrow_down"
+                                    title="Move down 1 mm"
+                                    class="btn btn-secondary"
+                                />
+                                <button
+                                    name="button_signature_offset_reset"
+                                    type="object"
+                                    string="Reset"
+                                    class="btn btn-outline-primary ms-2"
+                                />
+                            </div>
+                            <field name="signature_line_ids" mode="list" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field
+                                        name="name"
+                                        required="not is_company_stamp"
+                                    />
+                                    <field name="label_position" />
+                                    <field
+                                        name="bottom_label"
+                                        placeholder="e.g. Date"
+                                    />
+                                    <field
+                                        name="field_date_id"
+                                        domain="[('model_id', '=', model_id), ('ttype', 'in', ('date', 'datetime'))]"
+                                        options="{'no_create': True, 'no_open': True}"
+                                        context="{'list_view_ref':'common_report_layout.model_fields_report_config_view_list'}"
+                                    />
+                                    <field
+                                        name="is_company_stamp"
+                                        widget="boolean_toggle"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+
+                        <page name="page_option" string="Other Options">
+                            <group name="group_main_option">
+                                <group name="group_condition_1">
+                                    <field name="report_lang_options" />
+                                    <field
+                                        name="lang_code"
+                                        placeholder="e.g. en_US, th_TH, ..."
+                                        invisible="report_lang_options != 'fixed'"
+                                        required="report_lang_options == 'fixed'"
+                                    />
+                                </group>
+
+                                <group name="group_condition_2">
+                                    <field
+                                        name="is_locale_date"
+                                        widget="boolean_toggle"
+                                        options="{'autosave': false}"
+                                    />
+                                    <field
+                                        name="is_be_era"
+                                        widget="boolean_toggle"
+                                        invisible="not is_locale_date"
+                                        options="{'autosave': false}"
+                                    />
+                                    <field
+                                        name="is_time_format"
+                                        widget="boolean_toggle"
+                                        invisible="not is_locale_date"
+                                        options="{'autosave': false}"
+                                    />
+                                    <field
+                                        name="format_options"
+                                        invisible="not is_locale_date"
+                                    />
+                                    <field
+                                        name="field_partner_format_id"
+                                        domain="[('model_id', '=', model_id), ('ttype', '=', 'many2one'), ('relation', 'in', ('res.users', 'res.partner'))]"
+                                        options="{'no_create': True, 'no_open': True}"
+                                        invisible="format_options != 'by_partner' or not is_locale_date"
+                                        required="format_options == 'by_partner'"
+                                        context="{'list_view_ref':'common_report_layout.model_fields_report_config_view_list'}"
+                                    />
+                                    <field
+                                        name="date_format"
+                                        invisible="format_options != 'custom' or not is_locale_date"
+                                        required="format_options == 'custom'"
+                                    />
+                                    <field
+                                        name="time_format"
+                                        invisible="format_options != 'custom' or not is_time_format or not is_locale_date"
+                                        required="format_options == 'custom' and is_time_format"
+                                    />
+                                </group>
+                            </group>
+                            <div
+                                class="row"
+                                invisible="not is_locale_date"
+                                name="div_date_format_helper"
+                            >
+                                <div class="col-md-8 row" name="div_date_format_left">
+                                    <div class="col-12">
+                                        <div
+                                            class="o_horizontal_separator mb-3 mt-4 text-uppercase fw-bolder small"
+                                        >Legends for supported Date and Time Formats</div>
+                                    </div>
+                                    <div
+                                        class="col-sm"
+                                        name="div_date_format_example_1"
+                                    >
+                                        <div
+                                        >%a - Abbreviated weekday name (e.g., Fri)</div>
+                                        <div>%A - Full weekday name (e.g., Friday)</div>
+                                        <div
+                                        >%b - Abbreviated month name (e.g., Dec)</div>
+                                        <div>%B - Full month name (e.g., December)</div>
+                                        <div>%d - Day of the month [01,31]</div>
+                                        <div>%-d - Day of the month (no padding)</div>
+                                        <div>%j - Day of the year [001,366]</div>
+                                        <div>%H - Hour (24-hour clock) [00,23]</div>
+                                        <div>%I - Hour (12-hour clock) [01,12]</div>
+                                    </div>
+                                    <div
+                                        class="col-sm"
+                                        name="div_date_format_example_2"
+                                    >
+                                        <div>%M - Minutes [00,59]</div>
+                                        <div>%S - Seconds [00,61]</div>
+                                        <div>%p - Equivalent of either AM or PM."</div>
+                                        <div>%y - Year without century (e.g., 25)</div>
+                                        <div>%Y - Full year (e.g., 2025)</div>
+                                        <div>%m - Month number [01,12]</div>
+                                        <div>%-m - Month (no padding)</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="col-md-4 text-info"
+                                    name="div_date_format_right"
+                                >
+                                    <div
+                                        class="o_horizontal_separator mb-3 mt-4 text-uppercase fw-bolder small"
+                                    >Examples</div>
+                                    <div>1. %b, %B         → Dec, December</div>
+                                    <div>2. %a ,%A         → Fri, Friday</div>
+                                    <div>3. %y, %Y         → 08, 2008</div>
+                                    <div>4. %d, %m         → 05, 12</div>
+                                    <div>5. %H:%M:%S      → 18:25:20</div>
+                                    <div>6. %I:%M:%S %p  → 06:25:20 PM</div>
+                                    <div>7. %j              → 340</div>
+                                    <div>8. %S              → 20</div>
+                                    <div
+                                    >9. %w              → 5 ( Friday is the 6th day)</div>
+                                </div>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="report_config_view_search" model="ir.ui.view">
+        <field name="name">report.config.search</field>
+        <field name="model">report.config</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="model_id" />
+                <separator />
+                <group>
+                    <filter
+                        string="Model"
+                        name="group_model_id"
+                        context="{'group_by': 'model_id'}"
+                    />
+                    <filter
+                        string="Report"
+                        name="group_action_report_id"
+                        context="{'group_by': 'action_report_id'}"
+                    />
+                    <filter
+                        string="Company"
+                        name="group_company_id"
+                        context="{'group_by': 'company_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="report_config_action" model="ir.actions.act_window">
+        <field name="name">Configure Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+    </record>
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="report_layout_ibase" model="report.layout">
+        <field name="name">IBase</field>
+        <field name="sequence" eval="10" />
+        <field name="view_id" ref="common_report_layout.external_layout_ibase" />
+    </record>
+</odoo>

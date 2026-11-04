@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Logo - Company - Title  -->
+    <template id="ibase_header_company_info">
+        <div class="row w-100">
+            <!-- Company Logo -->
+            <div class="col-2" name="div_company_logo">
+                <img
+                    t-if="company.logo"
+                    class="report-company-img"
+                    t-att-src="image_data_uri(company.logo)"
+                    alt="Logo"
+                />
+            </div>
+
+            <!-- Company Address -->
+            <div class="col-3" name="company_address">
+                <span
+                    t-if="company.is_company_details_empty"
+                    t-field="company.partner_id"
+                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                />
+                <span
+                    t-if="not company.is_company_details_empty"
+                    class="text-nowrap"
+                    t-field="company.company_details"
+                />
+            </div>
+
+            <!-- Copy Information and Document Title -->
+            <div class="col text-end" name="div_copy">
+                <div
+                    t-if="show_copy and copy_count"
+                    t-attf-class="text-right {{ 'fw-bold' if copy_label_list[copy_count - 1].get('bold') else '' }}"
+                >
+                    <span t-out="copy_label_list[copy_count - 1]['name']" />
+                </div>
+                <h2
+                    class="fw-bold ibase-primary-color"
+                    t-out="copy_label_list[copy_count - 1]['title_name'] if is_specific_title and show_copy and copy_count else layout_document_title"
+                    name="report_document_title"
+                />
+            </div>
+        </div>
+    </template>
+
+    <!-- Partner - Box Detail  -->
+    <template id="ibase_header_document_info">
+        <div
+            class="row w-100 address-line-height align-items-start"
+            t-att-style="body_style"
+            name="header_body"
+        >
+            <!-- Partner Address Info -->
+            <div t-attf-class="#{col_address}" name="header_partner_info">
+                <div
+                    t-foreach="address_vals_list"
+                    t-as="address_vals"
+                    name="foreach_address_detail"
+                >
+                    <div
+                        t-attf-class="row {{ '' if address_vals.get('wrap') else 'text-nowrap' }}"
+                    >
+                        <div
+                            t-attf-class="#{address_vals.get('col_w')} {{ 'fw-bold' if address_vals.get('label_bold') else '' }}"
+                            t-out="address_vals.get('key')"
+                        />
+                        <div
+                            t-attf-class="col {{ 'fw-bold' if address_vals.get('value_bold') else '' }}"
+                            t-out="address_vals.get('value')"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Details -->
+            <div
+                t-attf-class="#{col_detail} {{ 'ibase-background-box-color box-document-detail' if document_vals_list else '' }}"
+                name="document_info"
+            >
+                <div
+                    t-foreach="document_vals_list"
+                    t-as="doc_vals"
+                    name="foreach_doc_detail"
+                >
+                    <div class="row">
+                        <div
+                            t-attf-class="#{doc_vals.get('col_w')} {{ 'fw-bold' if doc_vals.get('label_bold') else '' }}"
+                            t-out="doc_vals.get('key')"
+                        />
+                        <div
+                            t-attf-class="col {{ 'fw-bold' if doc_vals.get('value_bold') else '' }}"
+                            t-out="doc_vals.get('value')"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Header -->
+    <template id="ibase_layout_header">
+        <div
+            t-attf-class="header o_company_#{company.id}_layout o_report_layout_ibase"
+            name="main_header"
+        >
+            <t
+                t-call="common_report_layout.ibase_header_company_info"
+                name="call_header_company"
+            />
+            <t
+                t-call="common_report_layout.ibase_header_document_info"
+                name="call_header_document"
+            />
+        </div>
+    </template>
+</odoo>
